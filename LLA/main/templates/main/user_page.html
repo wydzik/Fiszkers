@@ -1,0 +1,100 @@
+{% extends "main/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+
+	<div class="col">
+
+			<div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+
+        </div>
+
+
+	<div class = "col">
+		<div class = "AddCourse">
+		<button onclick="window.location.href = '/course_creator';"class="button">Dodaj</button>
+		</div>
+
+	</div>
+
+
+
+			</div>
+
+</div>
+
+	</div>
+
+	  <div class="col">
+	  	{% for course in courses %} <!---I tutaj właśnie iteruję po liście courses pobranej dzięki context w views.py --->
+		    <div class="col offset-l6">
+		      <div class="card blue-grey darken-1">
+		        <div class="card-content white-text">
+		          <span class="card-title">{{course.course_title}}</span> <!---Mamy tutaj pojedynczy obiekt z listy courses, czyli po prostu Course (z models.py), więc mozemy się odwołać do jego poszczególnych kolumn --->
+					<p>{{course.course_description}}</p>
+					<p>{{course.course_published}}</p>
+					<br>
+		        </div>
+		        <div class="card-action">
+		          <a href="{% url 'main:course' course.id %}">Start that course!</a>
+		        </div>
+		      </div>
+		  </div>
+		{% endfor %}
+	</div>
+
+</div>
+
+<style>
+.rounded-circle{
+margin-right: 50px;
+margin-top: 20px;
+}
+.AddCourse{
+ margin-top: 50px;
+	margin-left: 100px;
+}
+button {
+	background: #00bdff;
+ 	font-size: 30px;
+	padding: 32px 16px;
+	border-radius: 30%;
+}
+button:disabled{
+	background: #00BDFF;;
+ 	font-size: 30px;
+	padding: 32px 16px;
+	border-radius: 30%;
+}
+button:hover
+{
+	background: #00BDFF;;
+ 	font-size: 30px;
+	padding: 32px 16px;
+	border-radius: 30%;
+	box-shadow: 0 5px #666;
+  	transform: translateY(4px);
+}
+button:active{
+    background: #00BDFF;;
+ 	font-size: 30px;
+	padding: 32px 16px;
+	border-radius: 30%;
+	box-shadow: 0 5px #666;
+  	transform: translateY(4px);
+}
+
+button:focus{
+    background: #00BDFF;;
+ 	font-size: 30px;
+	padding: 32px 16px;
+	border-radius: 30%;
+}
+</style>
+{% endblock %}

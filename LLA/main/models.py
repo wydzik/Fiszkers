@@ -37,3 +37,25 @@ class Word(models.Model):
 	def __str__(self):
 		return self.english
 
+
+class Word_POL(models.Model):
+	polish_w = models.CharField(max_length=200)
+	english_w = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.polish_w
+
+class Course_signup(models.Model):
+	profile = models.ForeignKey(User, on_delete=models.CASCADE)
+	course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+class FlashCard(models.Model):
+	words = models.ForeignKey(Word, default=1, on_delete=models.SET_DEFAULT)
+	course = models.ForeignKey(Course, default=1, on_delete=models.SET_DEFAULT)
+	known = models.IntegerField()
+
+class CustomWord(models.Model):
+	word = models.CharField(max_length=100)
+	definition = models.TextField()
+	course = models.ForeignKey(Course,default=1, on_delete=models.CASCADE)
+	known = models.BooleanField(default=False)
